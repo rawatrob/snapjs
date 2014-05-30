@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <title>Snap.js</title>
+        <meta http-equiv="x-ua-compatible" content="IE=edge" />
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.2.css">
+        <link rel="stylesheet" type="text/css" href="css/snap.css" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery.mobile-1.4.2.js"></script>
+        <script src="js/jquery-ui.js"></script>
+                        
+                                    
+                                    <script type="text/javascript">
+                                        
+                                        document.addEventListener("deviceready", onDeviceReady, false);
+                                        function onDeviceReady() {
+                                            
+                                            
+                                            setTimeout(function() {
+                                                       window.location ="removesplashscreen:";
+                                                       //navigator.splashscreen.hide();
+                                                       },50);
+                                                       
+                                                    //   loadData();
+                                                       
+                                                       document.addEventListener("backbutton", onBackKeyDown, false);
+                                        }
+                              
+                          
+                                    function removeWebSite(){
+                                        window.location="removeWebsite:";
+                                    }	
+                                    </script>
+                                    <script>
+                                        document.getElementsByTagName('html')[0].style.backgroundImage = 'url(images/splash.png)';
+                                        </script>
+                                    
+                                    <style>
+                                        #mainmenu {
+                                            position: absolute;
+                                            top: 0px;
+                                            left: 0;
+                                            right: 0;
+                                            bottom: 0px;
+                                            overflow: scroll;
+                                            -webkit-overflow-scrolling: touch;
+                                        }
+                                    </style>
+                                    
+    </head>
+    <body> <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-left">
+                <div>
+                    <h3>Snap.js</h3>
+                    
+                    <h4>Demos</h4>
+                    <ul>
+                        <li><a href="#;">Default</a></li>
+                        <li id ="dk"><a href="#;" >No Drag</a></li>
+                        <li><a href="#;">Drag Element</a></li>
+                        <li><a href="#;">Right Disabled</a></li>
+                        <li><a href="#;">Hyperextension Disabled</a></li>
+                        <li><a href="#;">Skinny Threshold</a></li>
+                        <li><a href="#;">Toggles</a></li>
+                        <li><a href="#;">Class Names</a></li>
+                        <li><a href="#;">Expanding</a></li>
+                        <li><a href="#;">Settings</a></li>
+                        <li><a href="#;">Ratchet</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+            <div id="submenu"  class="snap-drawer snap-drawer-right suMenUBG"> <ul>
+                        <li><a href="#;">Default</a></li>
+                        <li><a href="#;">No Drag</a></li>
+                        <li><a href="#;">Drag Element</a></li>
+                        <li><a href="#;">Right Disabled</a></li>
+                        <li><a href="#;">Hyperextension Disabled</a></li>
+                        <li><a href="#;">Skinny Threshold</a></li>
+                        <li><a href="#;">Toggles</a></li>
+                        <li><a href="#;">Class Names</a></li>
+                        <li><a href="#;">Expanding</a></li>
+                        <li><a href="#;">Settings</a></li>
+                        <li><a href="#;">Ratchet</a></li>
+                    </ul></div>
+        </div>
+        
+        <div id="content" class="snap-content">
+           <div id="toolbar">
+                <a href="#" id="open-left"></a>
+                <h1>Default</h1>
+            </div>
+        </div>
+        <script type="text/javascript" src="http://jakiestfu.github.io/Snap.js/snap.js"></script>
+        <script type="text/javascript">
+		document.getElementById("submenu").style.display=="none";
+            var snapper = new Snap({
+                element: document.getElementById('content'),
+				disable: 'right',
+				transitionSpeed: 0.3,
+				easing: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)'
+            });
+			var snapp= new Snap({ 
+			element: document.getElementById('submenu'),
+			disable: 'left',
+			 tapToClose: false,
+				//dragger: document.getElementById('dk')
+});
+//	snapp.addEventListener('click','#dk', function() {
+	var addEvent = function addEvent(element, eventName, func) {
+                if (element.addEventListener) {
+                    return element.addEventListener(eventName, func, false);
+                } else if (element.attachEvent) {
+                    return element.attachEvent("on" + eventName, func);
+                }
+            };
+			
+			addEvent(document.getElementById('dk'), 'click', function() {
+//$("#dk").click(function() {
+	
+                if (snapp.state().state == "right") {
+					
+                    snapp.close('left');
+					    setTimeout(function(){
+				//	$('#submenu').hide();
+					document.getElementById("submenu").style.display=="none";
+					},300)
+                } else {
+                   // $('#submenu').show(function(){ snapp.open('right');});
+					document.getElementById("submenu").style.display=="block";
+					snapp.open('right');
+					
+                }
+
+           });
+snapper.on('start', function(){
+		snapp.close('left');
+					    setTimeout(function(){
+					//$('#submenu').hide();
+					document.getElementById("submenu").style.display=="none";
+					},300)	
+  // Do Something
+});
+			
+            
+        </script>
+            </body>
+</html>
